@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1066181617731",
+    "firebase_url": "https://adminezpark.firebaseio.com",
+    "project_id": "adminezpark",
+    "storage_bucket": "adminezpark.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066181617731:android:b20f990fc443abb9",
+        "android_client_info": {
+          "package_name": "vn.redbean.adminezpark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066181617731-jv8ju0cmrub4ial0b2nok93edp19v0am.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.redbean.adminezpark",
+            "certificate_hash": "7220cde93dc6e49030ddb6566cebfbed053a18d4"
+          }
+        },
+        {
+          "client_id": "1066181617731-98ccdepf0j7ehlhhn2gf2d3q62tnkd9o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVVtTxLlKlCkKe3ueVzvL7QoUFHl1aNwQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066181617731-98ccdepf0j7ehlhhn2gf2d3q62tnkd9o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
