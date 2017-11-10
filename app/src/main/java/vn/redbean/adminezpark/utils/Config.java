@@ -1,4 +1,4 @@
-package vn.redbean.adminezpark;
+package vn.redbean.adminezpark.utils;
 
 public class Config {
     public static final String TOPIC_GLOBAL = "global";

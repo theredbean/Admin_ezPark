@@ -12,9 +12,9 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import vn.redbean.adminezpark.Config;
-import vn.redbean.adminezpark.MainActivity;
-import vn.redbean.adminezpark.NotificationUtils;
+import vn.redbean.adminezpark.utils.Config;
+import vn.redbean.adminezpark.activity.MainActivity;
+import vn.redbean.adminezpark.utils.NotificationUtils;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

@@ -1,4 +1,4 @@
-package vn.redbean.adminezpark;
+package vn.redbean.adminezpark.activity;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -21,8 +21,11 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
+import vn.redbean.adminezpark.utils.NotificationUtils;
+import vn.redbean.adminezpark.R;
 import vn.redbean.adminezpark.adapter.MessageAdapter;
 import vn.redbean.adminezpark.model.Message;
+import vn.redbean.adminezpark.utils.Config;
 
 public class MainActivity extends AppCompatActivity {
 

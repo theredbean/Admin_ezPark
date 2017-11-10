@@ -1,4 +1,4 @@
-package vn.redbean.adminezpark;
+package vn.redbean.adminezpark.utils;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -28,6 +28,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import vn.redbean.adminezpark.R;
 
 public class NotificationUtils {
 
