@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.redbean.adminezpark.R;
-import vn.redbean.adminezpark.model.OrderDetail;
+import vn.redbean.adminezpark.model.Data;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<OrderDetail> lstData = new ArrayList<>();
+    private List<Data> lstData = new ArrayList<>();
 
-    public OrderAdapter(List<OrderDetail> lstData) {
+    public OrderAdapter(List<Data> lstData) {
         this.lstData = lstData;
     }
 
@@ -27,11 +27,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        OrderDetail orderDetail = lstData.get(position);
-        holder.txtDriverName.setText(orderDetail.getCustomerName());
-        holder.txtDriverPhone.setText(orderDetail.getCustomerPhoneNumber());
-        holder.txtGarageName.setText(orderDetail.getParkingName());
-        holder.txtGaragePhone.setText(orderDetail.getParkingPhoneNumber());
+        Data data = lstData.get(position);
+        holder.txtDriverName.setText(data.getCustomerName());
+        holder.txtDriverPhone.setText(data.getCustomerPhoneNumber());
+        holder.txtGarageName.setText(data.getParkingName());
+        holder.txtGaragePhone.setText(data.getParkingPhoneNumber());
     }
 
     @Override
@@ -39,8 +39,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         return lstData.size();
     }
 
-    public void newList(List<OrderDetail> lstData) {
-        lstData.clear();
+    public void clear() {
+        this.lstData.clear();
+        notifyDataSetChanged();
+    }
+
+    public void newList(List<Data> lstData) {
         this.lstData = lstData;
         notifyDataSetChanged();
     }

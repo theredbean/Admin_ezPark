@@ -15,16 +15,13 @@ public class OrderResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    private List<OrderDetail> lstOrder = null;
+    private List<Data> data;
 
-    public OrderResponse() {
-    }
-
-    public OrderResponse(Integer error, String message, List<OrderDetail> lstOrder) {
+    public OrderResponse(Integer error, String message, List<Data> data) {
         super();
         this.error = error;
         this.message = message;
-        this.lstOrder = lstOrder;
+        this.data = data;
     }
 
     public Integer getError() {
@@ -43,11 +40,11 @@ public class OrderResponse {
         this.message = message;
     }
 
-    public List<OrderDetail> getLstOrder() {
-        return lstOrder;
+    public List<Data> getData() {
+        return data;
     }
 
-    public void setLstOrder(List<OrderDetail> lstOrder) {
-        this.lstOrder = lstOrder;
+    public void setData(List<Data> data) {
+        this.data = data;
     }
 }

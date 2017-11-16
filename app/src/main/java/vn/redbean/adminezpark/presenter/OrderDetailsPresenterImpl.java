@@ -28,6 +28,8 @@ public class OrderDetailsPresenterImpl implements OrderDetailsPresenter {
 
     @Override
     public void getListOrderDetails() {
+        view.onGettingListOrder();
+
         Call<OrderResponse> response = apiInterface.getListOrderDetails();
         response.enqueue(new Callback<OrderResponse>() {
             @Override
@@ -35,19 +37,18 @@ public class OrderDetailsPresenterImpl implements OrderDetailsPresenter {
                 if (response.isSuccessful()) {
                     OrderResponse body = response.body();
                     if (body != null)
-                        view.onGetListOrderDetails(body.getMessage(), true, body.getLstOrder());
+                        view.onGetListOrderDetailsSuccess(body.getMessage(), true, body.getData());
                     else
-                        view.onGetListOrderDetails("Lỗi", false, null);
+                        view.onGetListOrderDetailsSuccess("Lỗi", false, null);
                 } else {
-                    view.onGetListOrderDetails("Lỗi", false, null);
+                    view.onGetListOrderDetailsSuccess("Lỗi", false, null);
                 }
-
             }
 
             @Override
             public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
                 call.cancel();
-                view.onGetListOrderDetails("Lỗi", false, null);
+                view.onGetListOrderDetailsSuccess("Lỗi", false, null);
             }
         });
     }

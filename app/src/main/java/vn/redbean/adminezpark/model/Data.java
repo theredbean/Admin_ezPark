@@ -3,7 +3,7 @@ package vn.redbean.adminezpark.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class OrderDetail {
+public class Data {
 
     @SerializedName("OrderID")
     @Expose
@@ -48,7 +48,7 @@ public class OrderDetail {
     @Expose
     private String status;
 
-    public OrderDetail(Integer orderID, String qRCode, Integer customerID, String customerName, String customerEmail, String customerPhoneNumber, String customerCarNumber, Integer parkingID, String parkingName, String parkingEmail, String parkingPhoneNumber, String parkingAddress, String dateCreate, String status) {
+    public Data(Integer orderID, String qRCode, Integer customerID, String customerName, String customerEmail, String customerPhoneNumber, String customerCarNumber, Integer parkingID, String parkingName, String parkingEmail, String parkingPhoneNumber, String parkingAddress, String dateCreate, String status) {
         super();
         this.orderID = orderID;
         this.qRCode = qRCode;

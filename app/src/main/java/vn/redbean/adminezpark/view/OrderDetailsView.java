@@ -2,11 +2,13 @@ package vn.redbean.adminezpark.view;
 
 import java.util.List;
 
-import vn.redbean.adminezpark.model.OrderDetail;
+import vn.redbean.adminezpark.model.Data;
 
 public interface OrderDetailsView {
 
-    void onGetListOrderDetails(String message, boolean result, List<OrderDetail> list);
+    void onGettingListOrder();
+
+    void onGetListOrderDetailsSuccess(String message, boolean result, List<Data> list);
 
     void onSetupControls();
 

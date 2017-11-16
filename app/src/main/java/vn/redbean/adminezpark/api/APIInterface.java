@@ -6,7 +6,7 @@ import vn.redbean.adminezpark.model.OrderResponse;
 
 public interface APIInterface {
 
-    @GET("/order/list-order-detail")
+    @GET("order/list-order-detail")
     Call<OrderResponse> getListOrderDetails();
 
 }
