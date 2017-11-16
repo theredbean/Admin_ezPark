@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.redbean.adminezpark.R;
-import vn.redbean.adminezpark.model.Message;
+import vn.redbean.adminezpark.model.OrderDetail;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<Message> lstMessages = new ArrayList<>();
+    private List<OrderDetail> lstData = new ArrayList<>();
 
-    public MessageAdapter(List<Message> lstMessages) {
-        this.lstMessages = lstMessages;
+    public OrderAdapter(List<OrderDetail> lstData) {
+        this.lstData = lstData;
     }
 
     @Override
@@ -27,31 +27,32 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Message message = lstMessages.get(position);
-        holder.txtDriverName.setText(message.getDriver().getName());
-        holder.txtDriverPhone.setText(message.getDriver().getPhone());
-        holder.txtGarageName.setText(message.getGarage().getName());
-        holder.txtGaragePhone.setText(message.getGarage().getPhone());
+        OrderDetail orderDetail = lstData.get(position);
+        holder.txtDriverName.setText(orderDetail.getCustomerName());
+        holder.txtDriverPhone.setText(orderDetail.getCustomerPhoneNumber());
+        holder.txtGarageName.setText(orderDetail.getParkingName());
+        holder.txtGaragePhone.setText(orderDetail.getParkingPhoneNumber());
     }
 
     @Override
     public int getItemCount() {
-        return lstMessages.size();
+        return lstData.size();
     }
 
-    public void addToTop(Message message) {
-        lstMessages.add(0, message);
+    public void newList(List<OrderDetail> lstData) {
+        lstData.clear();
+        this.lstData = lstData;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtDriverName;
         private TextView txtDriverPhone;
         private TextView txtGarageName;
         private TextView txtGaragePhone;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             txtDriverName = view.findViewById(R.id.txtDriverName);
             txtDriverPhone = view.findViewById(R.id.txtDriverPhone);

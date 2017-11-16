@@ -4,43 +4,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vn.redbean.adminezpark.utils.Config;
-import vn.redbean.adminezpark.activity.MainActivity;
+import vn.redbean.adminezpark.view.MainActivity;
 import vn.redbean.adminezpark.utils.NotificationUtils;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-
-    private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     private NotificationUtils notificationUtils;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.e(TAG, "From: " + remoteMessage.getFrom());
-
-        if (remoteMessage == null)
-            return;
-
         if (remoteMessage.getNotification() != null) {
-            Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
-            handleNotification(remoteMessage.getNotification().getBody());
+            String body = remoteMessage.getNotification().getBody();
+            handleNotification(body);
         }
 
         if (remoteMessage.getData().size() > 0) {
-            Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData().toString());
                 handleDataMessage(json);
-            } catch (Exception e) {
-                Log.e(TAG, "Exception: " + e.getMessage());
+            } catch (Exception ignored) {
             }
         }
     }
@@ -58,8 +47,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void handleDataMessage(JSONObject json) {
-        Log.e(TAG, "push json: " + json.toString());
-
         try {
             JSONObject data = json.getJSONObject("data");
 
@@ -69,14 +56,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String imageUrl = data.getString("image");
             String timestamp = data.getString("timestamp");
             JSONObject payload = data.getJSONObject("payload");
-
-            Log.e(TAG, "title: " + title);
-            Log.e(TAG, "message: " + message);
-            Log.e(TAG, "isBackground: " + isBackground);
-            Log.e(TAG, "payload: " + payload.toString());
-            Log.e(TAG, "imageUrl: " + imageUrl);
-            Log.e(TAG, "timestamp: " + timestamp);
-
 
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
                 Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
@@ -93,10 +72,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
             }
-        } catch (JSONException e) {
-            Log.e(TAG, "Json Exception: " + e.getMessage());
-        } catch (Exception e) {
-            Log.e(TAG, "Exception: " + e.getMessage());
+        } catch (Exception ignored) {
         }
     }
 

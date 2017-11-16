@@ -51,7 +51,7 @@ public class NotificationUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext);
-        final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + mContext.getPackageName() + "/raw/notification");
+        final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + mContext.getPackageName() + "/raw/sound");
         if (!TextUtils.isEmpty(imageUrl)) {
             if (imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
                 Bitmap bitmap = getBitmapFromURL(imageUrl);
@@ -133,7 +133,7 @@ public class NotificationUtils {
     public void playNotificationSound() {
         try {
             Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-                    + "://" + mContext.getPackageName() + "/raw/notification");
+                    + "://" + mContext.getPackageName() + "/raw/sound");
             Ringtone r = RingtoneManager.getRingtone(mContext, alarmSound);
             r.play();
         } catch (Exception e) {

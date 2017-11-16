@@ -1,4 +1,4 @@
-package vn.redbean.adminezpark.activity;
+package vn.redbean.adminezpark.view;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -14,38 +14,60 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import vn.redbean.adminezpark.utils.NotificationUtils;
 import vn.redbean.adminezpark.R;
-import vn.redbean.adminezpark.adapter.MessageAdapter;
-import vn.redbean.adminezpark.model.Message;
+import vn.redbean.adminezpark.adapter.OrderAdapter;
+import vn.redbean.adminezpark.model.OrderDetail;
+import vn.redbean.adminezpark.presenter.OrderDetailsPresenterImpl;
 import vn.redbean.adminezpark.utils.Config;
+import vn.redbean.adminezpark.utils.NotificationUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OrderDetailsView {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     private RecyclerView recyclerView;
-    private MessageAdapter adapter;
+    private OrderAdapter adapter;
+
+    private OrderDetailsPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter = new OrderDetailsPresenterImpl(this);
+        presenter.create();
+    }
 
-        adapter = new MessageAdapter(new ArrayList<Message>());
+    @Override
+    public void onGetListOrderDetails(String message, boolean result, List<OrderDetail> list) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        if (result && list != null) {
+            adapter.newList(list);
+        }
+    }
+
+    @Override
+    public void onSetupControls() {
+        adapter = new OrderAdapter(new ArrayList<OrderDetail>());
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+    }
 
+    @Override
+    public void onSetupEvents() {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -54,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     displayFirebaseRegId();
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     String message = intent.getStringExtra("message");
-                    Gson gson = new GsonBuilder().create();
-                    Message mess = gson.fromJson(message, Message.class);
-                    adapter.addToTop(mess);
+                    presenter.getListOrderDetails();
                 }
             }
         };
@@ -77,11 +97,30 @@ public class MainActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(Config.REGISTRATION_COMPLETE));
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(Config.PUSH_NOTIFICATION));
         NotificationUtils.clearNotifications(getApplicationContext());
+        presenter.getListOrderDetails();
     }
 
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.mnu_message, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemDelete:
+                presenter.getListOrderDetails();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
