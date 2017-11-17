@@ -16,7 +16,7 @@ public class APIClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://admin.ezpark.vn/api/")
+                .baseUrl("http://192.168.1.25:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

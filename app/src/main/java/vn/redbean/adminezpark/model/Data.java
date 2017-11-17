@@ -44,11 +44,17 @@ public class Data {
     @SerializedName("DateCreate")
     @Expose
     private String dateCreate;
+    @SerializedName("TimeOrderIn")
+    @Expose
+    private String timeOrderIn;
+    @SerializedName("TimeOrderOut")
+    @Expose
+    private String timeOrderOut;
     @SerializedName("Status")
     @Expose
     private String status;
 
-    public Data(Integer orderID, String qRCode, Integer customerID, String customerName, String customerEmail, String customerPhoneNumber, String customerCarNumber, Integer parkingID, String parkingName, String parkingEmail, String parkingPhoneNumber, String parkingAddress, String dateCreate, String status) {
+    public Data(Integer orderID, String qRCode, Integer customerID, String customerName, String customerEmail, String customerPhoneNumber, String customerCarNumber, Integer parkingID, String parkingName, String parkingEmail, String parkingPhoneNumber, String parkingAddress, String dateCreate, String timeOrderIn, String timeOrderOut, String status) {
         super();
         this.orderID = orderID;
         this.qRCode = qRCode;
@@ -63,6 +69,8 @@ public class Data {
         this.parkingPhoneNumber = parkingPhoneNumber;
         this.parkingAddress = parkingAddress;
         this.dateCreate = dateCreate;
+        this.timeOrderIn = timeOrderIn;
+        this.timeOrderOut = timeOrderOut;
         this.status = status;
     }
 
@@ -168,6 +176,22 @@ public class Data {
 
     public void setDateCreate(String dateCreate) {
         this.dateCreate = dateCreate;
+    }
+
+    public String getTimeOrderIn() {
+        return timeOrderIn;
+    }
+
+    public void setTimeOrderIn(String timeOrderIn) {
+        this.timeOrderIn = timeOrderIn;
+    }
+
+    public String getTimeOrderOut() {
+        return timeOrderOut;
+    }
+
+    public void setTimeOrderOut(String timeOrderOut) {
+        this.timeOrderOut = timeOrderOut;
     }
 
     public String getStatus() {

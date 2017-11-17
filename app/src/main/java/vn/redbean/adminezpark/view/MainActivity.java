@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -57,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements OrderDetailsView 
 
         adapter = new OrderAdapter(new ArrayList<>());
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         loading = findViewById(R.id.loading);
+        loading.setVisibility(View.GONE);
     }
 
     @Override
@@ -69,20 +68,19 @@ public class MainActivity extends AppCompatActivity implements OrderDetailsView 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                /*if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
                     displayFirebaseRegId();
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     String message = intent.getStringExtra("message");
                     presenter.getListOrderDetails();
-                }
+                }*/
+                presenter.getListOrderDetails();
             }
         };
         displayFirebaseRegId();
 
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            presenter.getListOrderDetails();
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.getListOrderDetails());
     }
 
     @Override
